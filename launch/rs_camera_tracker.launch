@@ -1,4 +1,4 @@
 <launch>
     <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
-    <node pkg="ag_tracker" name="blob_tracker_rs" type="blob_tracker_rs.py" output="screen"/>
+    <node pkg="ag_trackers" name="blob_tracker_rs" type="blob_tracker_rs.py" output="screen"/>
 </launch>
