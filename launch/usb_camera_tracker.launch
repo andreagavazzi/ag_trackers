@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
+    <node pkg="ag_blob_tracker" name="blob_tracker" type="blob_tracker.py" output="screen"/>
+</launch>
