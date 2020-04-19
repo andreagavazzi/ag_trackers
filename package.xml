@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ag_tracker</name>
+  <name>ag_trackers</name>
   <version>0.0.0</version>
-  <description>The ag_tracker package</description>
+  <description>The ag_trackers package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
