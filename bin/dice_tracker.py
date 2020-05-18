@@ -3,6 +3,7 @@
 import rospy
 import cv2
 import numpy as np
+from std_msgs.msg import Int8
 from sensor_msgs.msg import Image, RegionOfInterest
 from cv_bridge import CvBridge, CvBridgeError
 
@@ -12,6 +13,7 @@ rospy.loginfo('Tracker node started.')
 # crea oggetto bridge e il publisher per le coordinate
 bridge = CvBridge()
 roi_pub = rospy.Publisher('roi', RegionOfInterest, queue_size=1)
+roi_pub_dice = rospy.Publisher('dice_value', Int8, queue_size=1)
 
 # Inizializza il messaggio
 roi = RegionOfInterest()
@@ -60,11 +62,11 @@ def callback(data):
         im_with_keypoints = cv2.drawKeypoints(cv_image, keypoints, np.array([]), (0, 0, 255),
                                               cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         #
-        cv2.imshow("image KP", im_with_keypoints)  # display the frame with keypoints added.
+        cv2.imshow("Dice tracker", im_with_keypoints)  # display the frame with keypoints added.
         #
         reading = len(keypoints)  # 'reading' counts the number of keypoints (pips).
         #
-        # print reading
+        roi_pub_dice.publish(reading)
 
 
 # !!!!!! Fine codice
@@ -126,7 +128,7 @@ def callback(data):
 def main():
     # Sottoscrive il raw camera image topic e pubblica il RoI
     while not rospy.is_shutdown():
-        camera_sub = rospy.Subscriber("/camera/color/image_raw", Image, callback)
+        camera_sub = rospy.Subscriber("/usb_cam/image_raw", Image, callback)
         rospy.spin()
     rospy.on_shutdown(shutdown)
 

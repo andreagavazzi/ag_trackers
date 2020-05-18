@@ -2,6 +2,7 @@
   <dictionary name="andrea">
     <words>
       <w>dynamixel</w>
+      <w>keypoints</w>
       <w>pypot</w>
       <w>realsense</w>
     </words>

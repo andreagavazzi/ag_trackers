@@ -83,26 +83,26 @@ def callback(data):
                 # Pubblico le coordinate
                 roi_pub.publish(roi)
 
-        # else:       # if no blue is found all image is roi (useful for stopping the tracking)
-        #       roi.x_offset = rxo
-        #       roi.y_offset = 0
-        #       roi.width = 800
-        #       roi.height = 600
-        #       roi_pub.publish(roi)
+        else:       # se non trova il blue allora pubblica zero
+            roi.x_offset = 0
+            roi.y_offset = 0
+            roi.width = 0
+            roi.height = 0
+            roi_pub.publish(roi)
 
         # Mostre le linee di tolleranza per il nodo roi_follower
-        tol = 70
-        cv2.line(frame, (0, 300-tol), (800, 300-tol), (0, 255, 0), 1)
-        cv2.line(frame, (0, 300+tol), (800, 300+tol), (0, 255, 0), 1)
-        cv2.line(frame, (400-tol, 0), (400-tol, 600), (0, 255, 0), 1)
-        cv2.line(frame, (400+tol, 0), (400+tol, 600), (0, 255, 0), 1)
+        # tol = 70
+        # cv2.line(frame, (0, 300-tol), (800, 300-tol), (0, 255, 0), 1)
+        # cv2.line(frame, (0, 300+tol), (800, 300+tol), (0, 255, 0), 1)
+        # cv2.line(frame, (400-tol, 0), (400-tol, 600), (0, 255, 0), 1)
+        # cv2.line(frame, (400+tol, 0), (400+tol, 600), (0, 255, 0), 1)
         # Mostra il video
         cv2.imshow('Camera', frame)
 
         # Mostra la maschera in una seconda finestra per debug
         # cv2.imshow('hsv', hsv)
         # cv2.imshow('mask', mask)
-        # cv2.waitKey(3)
+        cv2.waitKey(3)
 
     except CvBridgeError, e:
         print e
